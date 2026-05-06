@@ -3,7 +3,7 @@ import cv2
 import pandas as pd
 from feature_A import get_asymmetry
 from feature_B import get_compactness
-from utils import MASK_DIR, OUTPUT_CSV_PATH
+from utils import MASK_DIR, OUTPUT_CSV_PATH, TEST_SUBSET
 
 def extract_all_features():
     results = []
@@ -12,6 +12,10 @@ def extract_all_features():
     for filename in os.listdir(MASK_DIR):
         if filename.endswith(".png") or filename.endswith(".jpg"):
             img_id = filename.replace("_mask", "").split(".")[0]
+            
+            # Skip if the lesion is not in our specific test subset
+            if img_id not in TEST_SUBSET:
+                continue
             
             # Read the mask in grayscale
             filepath = os.path.join(MASK_DIR, filename)

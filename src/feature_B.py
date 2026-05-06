@@ -1,7 +1,6 @@
 import numpy as np
 from math import pi
 from skimage import morphology
-from scipy.spatial import ConvexHull
 
 def get_compactness(mask):
     """

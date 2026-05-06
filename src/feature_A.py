@@ -39,9 +39,10 @@ def crop(mask):
 
 def get_asymmetry(mask):
     """
-    Calculates the asymmetry score by comparing the mask to its flipped version
-    across 6 different rotation angles.
+    Calculates a normalized asymmetry score by comparing the binary mask to
+    its left-right mirrored version across 6 different rotation angles.
     """
+    mask = (mask > 0).astype(np.uint8)
     scores = []
     
     # Loop 6 times, rotating 30 degrees each time (180 degrees total)
@@ -53,10 +54,10 @@ def get_asymmetry(mask):
         if area == 0:
             scores.append(0)
         else:
-            # Calculate XOR sum and divide by total area
-            xor_sum = np.sum(np.logical_xor(segment, np.flip(segment)))
-            scores.append(xor_sum / area)
+            # Compare against a left-right mirror and normalize to [0, 1].
+            xor_sum = np.sum(np.logical_xor(segment, np.fliplr(segment)))
+            scores.append(xor_sum / (2 * area))
             
-        mask = rotate(mask, 30)
+        mask = rotate(mask, 30, order=0, preserve_range=True).astype(np.uint8)
         
     return sum(scores) / len(scores)
