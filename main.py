@@ -7,7 +7,7 @@ import src.modeltest
 import src.validation
 import src.drop
 
-def main(features_path, prediction_results_path, model_path, load_model,):
+def main(extendedfeatures_path,basemodel_path,extendedmodel_path,greymodel_path,rgbmodel_path,featuresbaseline_path,validation_path,allcolormodel_path,rgb_hsvmodel_path,hsv_greymodel_path,rgb_greymodel_path,prediction_results_base_path,prediction_results_extended_path,prediction_results_grey_path,prediction_results_rgb_path,prediction_results_rgb_grey_path,prediction_results_rgb_hsv_path,prediction_results_hsv_grey_path,prediction_results_all_path,load_model):
     """
     Docstring for main
     
@@ -42,7 +42,7 @@ def main(features_path, prediction_results_path, model_path, load_model,):
         basefeatures["diagnostic"] = basefeatures["diagnostic"].apply(src.cancer.cancer)
         extendedfeatures["diagnostic"] = extendedfeatures["diagnostic"].apply(src.cancer.cancer)
         rgb_greyfeatures = src.drop.hsv(extendedfeatures)
-        greyfeatures = src.drop.rbg(rgb_greyfeatures)
+        greyfeatures = src.drop.rgb(rgb_greyfeatures)
         rgb_hsvfeatures = src.drop.grey(extendedfeatures)
         hsvfeatures = src.drop.rgb(rgb_hsvfeatures)
         rgbfeatures = src.drop.grey(rgb_greyfeatures)
@@ -104,17 +104,24 @@ if __name__ == "__main__":
     extendedfeatures_path = "./data/extended_features.csv"
     featuresbaseline_path = "./data/baseline_features.csv"
     validation_path = "./data/validation.csv"
-    prediction_results_path = "./result/predictions/predictions_MODEL.csv"
-    basemodel_path = "./result/models/basemodel.pkl"
-    extendedmodel_path = "./result/models/extendedmodel.pkl"
-    greymodel_path = "./result/models/greymodel.pkl"
-    rgbmodel_path = "./result/models/rgbmodel.pkl"
-    rgb_greymodel_path = "./result/models/rgbgreymodel.pkl"
-    hsv_greymodel_path = "./result/models/hsvgreymodel.pkl"
-    rgb_hsvmodel_path = "./result/models/rgbhsvmodel.pkl"
-    allcolormodel_path = "./result/models/allcolormodel.pkl"
+    prediction_results_base_path = "./results/predictions/predictions_MODEL.csv"
+    prediction_results_extended_path = "./results/predictions/predictions_MODEL.csv"
+    prediction_results_grey_path = "./results/predictions/predictions_MODEL.csv"
+    prediction_results_rgb_path = "./results/predictions/predictions_MODEL.csv"
+    prediction_results_rgb_grey_path = "./results/predictions/predictions_MODEL.csv"
+    prediction_results_rgb_hsv_path = "./results/predictions/predictions_MODEL.csv"
+    prediction_results_hsv_grey_path = "./results/predictions/predictions_MODEL.csv"
+    prediction_results_all_path = "./results/predictions/predictions_MODEL.csv"
+    basemodel_path = "./results/models/basemodel.pkl"
+    extendedmodel_path = "./results/models/extendedmodel.pkl"
+    greymodel_path = "./results/models/greymodel.pkl"
+    rgbmodel_path = "./results/models/rgbmodel.pkl"
+    rgb_greymodel_path = "./results/models/rgbgreymodel.pkl"
+    hsv_greymodel_path = "./results/models/hsvgreymodel.pkl"
+    rgb_hsvmodel_path = "./results/models/rgbhsvmodel.pkl"
+    allcolormodel_path = "./results/models/allcolormodel.pkl"
 
 
     load_model = False
 
-    main(extendedfeatures_path, prediction_results_path,model_path,load_model)
+    main(extendedfeatures_path,basemodel_path,extendedmodel_path,greymodel_path,rgbmodel_path,featuresbaseline_path,validation_path,allcolormodel_path,rgb_hsvmodel_path,hsv_greymodel_path,rgb_greymodel_path,prediction_results_base_path,prediction_results_extended_path,prediction_results_grey_path,prediction_results_rgb_path,prediction_results_rgb_grey_path,prediction_results_rgb_hsv_path,prediction_results_hsv_grey_path,prediction_results_all_path,load_model)
